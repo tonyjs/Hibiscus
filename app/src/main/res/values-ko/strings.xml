@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Hibiscus</string>
+    <string name="hello_world">당신의 삶을 기록해보세요! 제가 도와드릴께요!\n먼저 간단한 닉네임을 입력해주세요!</string>
+    <string name="desc_my_nickname">내 닉네임은 %s</string>
+    <string name="ok_wait_a_minute">네! 잠시만 기다려주세요.</string>
+    <string name="wait_a_minute">조금만 기다려주세요…</string>
+    <string name="welcome_user">%s님 반가워요!</string>
+    <string name="click_create_post">글쓰기 버튼을 눌러보세요!</string>
+    <string name="create_post">글쓰기</string>
+    <string name="done">완료</string>
+    <string name="photo">사진</string>
+    <string name="input_title">제목</string>
+    <string name="input_text">문단</string>
+    <string name="pick_photo">사진을 선택하세요.</string>
+    <string name="please_input_text_or_photo">글이나 사진이 필요해요!</string>
+    <string name="please_input_title">제목을 입력해주세요!</string>
+    <string name="error_review_please">죄송합니다. 구글플레이 리뷰에 남겨주시면 좋겠습니다.</string>
+    <string name="error_on_sign_in">죄송합니다. 닉네임을 설정하는데 문제가 생겼어요.\n다시 입력해주세요.</string>
+    <string name="error_on_photo_list">사진 불러오기에 문제가 있네요.</string>
+    <string name="error_on_create_post_load">글쓰기에 문제가 있네요.</string>
+    <string name="error_on_create_post">글 저장에 문제가 있네요.</string>
+    <string name="error_on_post_list">글 불러오기에 문제가 있네요.</string>
+    <string name="error_on_main">앱에 문제가 있네요.</string>
+</resources>

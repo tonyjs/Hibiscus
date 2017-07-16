@@ -1,0 +1,40 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme"
+        parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/color_orange</item>
+    </style>
+
+    <style name="EditText.Post.Form"
+        parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">@android:color/transparent</item>
+        <item name="colorControlActivated">@color/color_orange</item>
+        <item name="colorControlHighlight">@color/color_orange</item>
+    </style>
+
+    <style name="EditText.Nickname"
+        parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">@android:color/transparent</item>
+        <item name="colorControlActivated">@color/color_red</item>
+        <item name="colorControlHighlight">@color/color_red</item>
+    </style>
+
+    <style name="Ripple"/>
+
+    <style name="Ripple.Green">
+        <item name="colorControlHighlight">@color/color_green</item>
+    </style>
+
+    <style name="Ripple.Red">
+        <item name="colorControlHighlight">@color/color_red</item>
+    </style>
+
+    <style name="Ripple.Orange">
+        <item name="colorControlHighlight">@color/color_orange</item>
+    </style>
+
+</resources>

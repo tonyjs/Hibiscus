@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="tag_id_for_glide" type="id"/>
+    <item name="tag_id_for_app" type="id"/>
+</resources>
