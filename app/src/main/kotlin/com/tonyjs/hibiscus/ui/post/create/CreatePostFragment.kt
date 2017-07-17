@@ -139,6 +139,12 @@ class CreatePostFragment : BaseFragment() {
         }
 
         onClick(btnCreatePost) {
+            if (post.title.isNullOrBlank()) {
+                toast(R.string.please_input_title)
+                return@onClick
+            }
+
+            btnCreatePost.isEnabled = false
             createPost()
         }
 
@@ -154,22 +160,20 @@ class CreatePostFragment : BaseFragment() {
     }
 
     private fun createPost() {
-        if (post.title.isNullOrBlank()) {
-            toast(R.string.please_input_title)
-            return
-        }
-
         postViewModel.createAndGet(post)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSuccess { postViewModel.createEvent.value = it }
                 .subscribe({
+                    close()
                     navigationViewModel.moveTo(NavigationTo.POST_LIST)
                 }, { error ->
                     LOG.e(TAG, error)
                     alert(getString(R.string.error_review_please),
                             getString(R.string.error_on_create_post), init = {
-                        okButton { }
+                        okButton {
+                            btnCreatePost.isEnabled = true
+                        }
                     })
                 })
     }
