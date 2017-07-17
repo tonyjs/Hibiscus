@@ -11,23 +11,13 @@ This repo is using MVVM(without Databinding), Rxjava2, Requery(orm), Retrofit2, 
 
 ### Designing the app. MVVM
 
-##### ViewModel  - communication between Ui and Data layer.
-* UserViewModel : deal with User data.(nickname and token. the token will be taken into [Telegraph Api](http://telegra.ph/api))
-* PostViewModel : deal with Post data.(title, created time and any texts, images)
-
 ##### Repository - Create, Read, Update, Delete the Model(representative the Application).
 * LocalRepository : deal with Data which provided by Database, ContentProvider, Preferences and etc without networking.
 * RemoteRepository : deal with Data which provided by Networking.
 
-##### Dependency Injection - using Dagger 2
-* AppModule : provide classes from Application(Context, Resources, ContentResolver).
-* DatabaseModule : provide Database(using [Requery](https://github.com/requery/requery))
-* NetworkModule : provide the class which can networking(using [Retrofit2](https://github.com/square/retrofit)).
-* MapperModule : provide mapper classes. the Model has the source from.
-  * ~Entity : from the Local(Database, ContentProvider, Preferences). eg. PostEntity
-  * ~DTO : from the Remote. eg. UserDTO
-* RepositoryModule : provide Repository classes. eg. PostLocalRepository
-* DataComponent : wrap all classes from Modules. and used for injecting.
+##### ViewModel  - communication between Ui and Data layer.
+* UserViewModel : deal with User data.(nickname and token. the token will be taken into [Telegraph Api](http://telegra.ph/api))
+* PostViewModel : deal with Post data.(title, created time and any texts, images)
 
 ##### Application structure
 * MainActivity : the one and only activity for this application.
@@ -35,9 +25,19 @@ This repo is using MVVM(without Databinding), Rxjava2, Requery(orm), Retrofit2, 
 * CreatePostFragment : show users to create posts.
 * PhotoListFragment : show users photo list from ContentProvider.
 
+##### Dependency Injection - using Dagger 2
+* AppModule : provide classes from Application(Context, Resources, ContentResolver).
+* DatabaseModule : provide Database(using [Requery](https://github.com/requery/requery))
+* NetworkModule : provide the class which can networking(using [Retrofit2](https://github.com/square/retrofit)).
+* MapperModule : provide mapper classes. Mapper classs make the Model from the source.
+  * ~Entity : from the Local(Database, ContentProvider, Preferences). eg. PostEntity
+  * ~DTO : from the Remote. eg. UserDTO
+* RepositoryModule : provide Repository classes. eg. PostLocalRepository
+* DataComponent : wrap all classes from Modules. and used for injecting.
+
 ##### Flow
 if not the application contains any data, shows the guide(like ChatBot).
-When the User input the nickname and confirm, try to retrieve token from `Telegraph` using nickname. 
+When the User types the nickname and confirm, try to retrieve token from `Telegraph` using nickname. 
 and then guide to create post. User can create the post and shows the posts.
 
 ##### Todo features
