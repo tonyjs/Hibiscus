@@ -21,7 +21,7 @@ task clean(type: Delete) {
 }
 
 ext {
-    appVersionCode = 1
+    appVersionCode = 2
     appVersionName = '1.0.0'
 
     // Sdk and tools
