@@ -29,13 +29,13 @@ This repo is using MVVM(without Databinding), Rxjava2, Requery(orm), Retrofit2, 
 * RepositoryModule : provide Repository classes. eg. PostLocalRepository
 * DataComponent : wrap all classes from Modules. and used for injecting.
 
-###### Application structure
+##### Application structure
 * MainActivity : the one and only activity for this application.
 * PostListFragment : show the posts.
 * CreatePostFragment : show users to create posts.
 * PhotoListFragment : show users photo list from ContentProvider.
 
-###### Flow
+##### Flow
 if not the application contains any data, shows the guide(like ChatBot).
 When the User input the nickname and confirm, try to retrieve token from `Telegraph` using nickname. 
 and then guide to create post. User can create the post and shows the posts.
