@@ -22,7 +22,7 @@ class PostListAdapter : RecyclerView.Adapter<PostListAdapter.ViewHolder>() {
 
     var preLoader: ((Long) -> Unit)? = null
 
-    var viewCaches = hashMapOf<Long, View>()
+    var viewCaches = LinkedHashMap<Long, View>(50)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val frame = FrameLayout(parent.context)
@@ -41,22 +41,15 @@ class PostListAdapter : RecyclerView.Adapter<PostListAdapter.ViewHolder>() {
 
                 setupBodies(this@itemView, post)
 
-            } else if (childCount == 1) {
-                val child = getChildAt(0)
-                if (post != (child.tag as? Post)) {
-                    this@itemView.removeView(child)
-
-                    setupBodies(this@itemView, post)
-                } else {
-
-                }
             } else {
+
                 this@itemView.removeAllViews()
                 viewCaches[post.id]?.let {
                     this@itemView.addView(it)
                 } ?: let {
                     setupBodies(this@itemView, post)
                 }
+
             }
         }
 
