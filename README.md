@@ -3,11 +3,11 @@ Hibiscus, simplified mobile blog application. [GooglePlay](https://play.google.c
 
 This repo is using MVVM(without Databinding), Rxjava2, Requery(orm), Retrofit2, Dagger2, Glide, anko and etc.
 
-![Image1](https://github.com/tonyjs/Hibiscus/blob/master/sceenshots/Screenshot_1.png) 
-![Image2](https://github.com/tonyjs/Hibiscus/blob/master/sceenshots/Screenshot_2.png) 
-![Image3](https://github.com/tonyjs/Hibiscus/blob/master/sceenshots/Screenshot_3.png) 
-![Image4](https://github.com/tonyjs/Hibiscus/blob/master/sceenshots/Screenshot_4.png) 
-![Image5](https://github.com/tonyjs/Hibiscus/blob/master/sceenshots/Screenshot_5.png)
+![Image1](https://github.com/tonyjs/Hibiscus/blob/master/screenshots/Screenshot_1.png) 
+![Image2](https://github.com/tonyjs/Hibiscus/blob/master/screenshots/Screenshot_2.png) 
+![Image3](https://github.com/tonyjs/Hibiscus/blob/master/screenshots/Screenshot_3.png) 
+![Image4](https://github.com/tonyjs/Hibiscus/blob/master/screenshots/Screenshot_4.png) 
+![Image5](https://github.com/tonyjs/Hibiscus/blob/master/screenshots/Screenshot_5.png)
 
 ### Designing the app. MVVM
 
