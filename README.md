@@ -36,15 +36,15 @@ This repo is using MVVM(without Databinding), Rxjava2, Requery(orm), Retrofit2, 
 * DataComponent : wrap all classes from Modules. and used for injecting.
 
 ##### Flow
-if not the application contains any data, shows the guide(like ChatBot).
-When the User types the nickname and confirm, try to retrieve token from `Telegraph` using nickname. 
-and then guide to create post. User can create the post and shows the posts.
+if the application does not  contains any data, chat-bot-styled guide shows how to. 
+When the user types the nickname and confirm, it tries to retrieve token from Telegraph using nickname, and then guides user to create a post. 
+After the guide, user can create the post, and read the posts after he or she uploads the post.
 
 ##### Todo features
-* update the post.
-* export the post into `Telegraph` and user can share the link.
-* filter by date, tags and etc.
-* zoom the image.
+Edit the post.
+Export the post into Telegraph so that user can share the link.
+Add filter elements, like date and tags, etc.
+Available to zoom image.
 
 
 License
