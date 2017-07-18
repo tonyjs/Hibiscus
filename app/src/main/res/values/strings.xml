@@ -1,24 +1,24 @@
 <resources>
     <string name="app_name">Hibiscus</string>
-    <string name="hello_world">Log your life! I can help you.\n Please input your nickname.</string>
+    <string name="hello_world">Hello I am your Hibiscus assistant! \n To begin with, could you tell me your nickname so that we can start?</string>
     <string name="desc_my_nickname">My nickname is %s</string>
-    <string name="ok_wait_a_minute">OK! Wait a minute.</string>
-    <string name="wait_a_minute">Wait a minute please…</string>
+    <string name="ok_wait_a_minute">Thanks for letting me know! Please wait just a moment.</string>
+    <string name="wait_a_minute">Won't take that long…</string>
     <string name="welcome_user">Welcome %s!</string>
-    <string name="click_create_post">Click the Create Post Button, please.</string>
+    <string name="click_create_post">Click the Create Post Button now and start log your life!</string>
     <string name="create_post">Create Post</string>
     <string name="done">Done</string>
     <string name="photo">Photo</string>
     <string name="input_title">Title</string>
     <string name="input_text">Text</string>
     <string name="pick_photo">Please select a photo.</string>
-    <string name="error_review_please">Sorry. I hope you leave it to Google Play reviews.</string>
-    <string name="error_on_sign_in">Sorry, There is a problem sign in.\nPlease retry.</string>
-    <string name="error_on_photo_list">There is a problem loading the picture.</string>
-    <string name="error_on_create_post_load">There is a problem with writing a post.</string>
-    <string name="error_on_create_post">There is a problem saving the post.</string>
-    <string name="error_on_post_list">There is a problem with loading posts.</string>
-    <string name="error_on_main">There is a problem with app.</string>
-    <string name="please_input_text_or_photo">Please input text or photo.</string>
-    <string name="please_input_title">Please input title.</string>
+    <string name="error_review_please">Sorry, seems something went wrong:( Could you let me know what happend to Google Play reviews?</string>
+    <string name="error_on_sign_in">Sorry, There is a problem signing you in.\nPlease try again!</string>
+    <string name="error_on_photo_list">Awww... There is a problem loading the picture.:(</string>
+    <string name="error_on_create_post_load">Awww... There is a problem writing a post.:(</string>
+    <string name="error_on_create_post">Awww... There is a problem saving the post.</string>
+    <string name="error_on_post_list">Awww... There is a problem with loading posts.</string>
+    <string name="error_on_main">Awww... There is a problem with app.</string>
+    <string name="please_input_text_or_photo">Please put something on your post!</string>
+    <string name="please_input_title">it seems you forgot to put title!</string>
 </resources>
