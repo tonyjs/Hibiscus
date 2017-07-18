@@ -12,10 +12,10 @@ import com.bumptech.glide.load.resource.bitmap.BitmapTransformation
 import io.reactivex.android.schedulers.AndroidSchedulers
 import java.util.concurrent.TimeUnit
 
-inline fun postToMainThread(runCondition: Boolean = true, delayMillis: Long = 0L,
-                            crossinline job: () -> Unit) {
+fun postToMainThread(runCondition: () -> Boolean, delayMillis: Long = 0L,
+                     job: () -> Unit) {
     val withCondition = {
-        if (runCondition) {
+        if (runCondition.invoke()) {
             job()
         }
     }
