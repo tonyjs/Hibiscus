@@ -179,7 +179,7 @@ class CreatePostFragment : BaseFragment() {
     }
 
     private fun showPhotoList() {
-        postToMainThread(runCondition = isAlive(lifecycle)) {
+        postToMainThread(runCondition = { isAlive(lifecycle) }) {
             childFragmentManager.findFragmentByTag(PhotoListFragment.TAG)?.let {
                 (it as PhotoListFragment).dialog.show()
                 return@postToMainThread
@@ -190,7 +190,7 @@ class CreatePostFragment : BaseFragment() {
     }
 
     private fun hidePhotoList() {
-        postToMainThread(runCondition = isAlive(lifecycle)) {
+        postToMainThread(runCondition = { isAlive(lifecycle) }) {
             childFragmentManager.findFragmentByTag(PhotoListFragment.TAG)?.let {
                 (it as PhotoListFragment).dialog.hide()
             }

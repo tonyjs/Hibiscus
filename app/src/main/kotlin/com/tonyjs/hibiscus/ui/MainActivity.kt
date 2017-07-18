@@ -183,7 +183,7 @@ class MainActivity : AppCompatActivity(), LifecycleRegistryOwner {
 
         messageViewModel.write(getString(R.string.desc_my_nickname, nickname()), Message.From.HUMAN)
 
-        postToMainThread(runCondition = isAlive(lifecycle), delayMillis = 1000L) {
+        postToMainThread(runCondition = { isAlive(lifecycle) }, delayMillis = 1000L) {
             messageViewModel.write(getString(R.string.ok_wait_a_minute), Message.From.BOT)
         }
 
@@ -201,7 +201,7 @@ class MainActivity : AppCompatActivity(), LifecycleRegistryOwner {
                     LOG.e(TAG, error)
                     messageViewModel.write(getString(R.string.error_on_sign_in), Message.From.BOT)
 
-                    postToMainThread(runCondition = isAlive(lifecycle), delayMillis = 1000L) {
+                    postToMainThread(runCondition = { isAlive(lifecycle) }, delayMillis = 1000L) {
                         navigationViewModel.moveTo(NavigationTo.SIGN_IN)
                     }
                 }).apply { addDisposable(this) }
@@ -212,7 +212,7 @@ class MainActivity : AppCompatActivity(), LifecycleRegistryOwner {
 
         messageViewModel.write(getString(R.string.welcome_user, user.nickname), Message.From.BOT)
 
-        postToMainThread(runCondition = isAlive(lifecycle), delayMillis = 1000L) {
+        postToMainThread(runCondition = { isAlive(lifecycle) }, delayMillis = 1000L) {
             navigationViewModel.moveTo(NavigationTo.GUIDE_TO_CREATE_POST)
         }
     }
@@ -244,7 +244,7 @@ class MainActivity : AppCompatActivity(), LifecycleRegistryOwner {
                 .subscribe({
                     val delay = 1000L - (System.currentTimeMillis() - startTime)
 
-                    postToMainThread(runCondition = isAlive(lifecycle), delayMillis = delay) {
+                    postToMainThread(runCondition = { isAlive(lifecycle) }, delayMillis = delay) {
                         guideToNext(it)
                     }
                 }, { error ->
@@ -284,7 +284,7 @@ class MainActivity : AppCompatActivity(), LifecycleRegistryOwner {
 
     private fun addFragment(fragment: Fragment, tag: String, toBackStack: Boolean = false,
                             transition: Int = FragmentTransaction.TRANSIT_FRAGMENT_OPEN) {
-        postToMainThread(runCondition = isAlive(lifecycle)) {
+        postToMainThread(runCondition = { isAlive(lifecycle) }) {
             supportFragmentManager.findFragmentByTag(tag)?.let { return@postToMainThread }
 
             val ft = supportFragmentManager.beginTransaction()
