@@ -66,32 +66,24 @@ class CreatePostFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         // setup user
-
         userViewModel = ViewModelProviders.of(activity, ViewModelFactory.from(activity.application))
                 .get(UserViewModel::class.java)
 
-        if (userViewModel.userData.value != null) {
-            post = Post.temp(userViewModel.userData.value!!)
-            setupViews()
-        } else {
-
-            userViewModel.loadAccount()
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .doOnSuccess { userViewModel.userData.value = it }
-                    .subscribe({
-                        post = Post.temp(it)
-                        setupViews()
-                    }, { error ->
-                        LOG.e(TAG, error)
-                        alert(getString(R.string.error_review_please),
-                                getString(R.string.error_on_create_post_load), init = {
-                            okButton {
-                                close()
-                            }
-                        })
+        userViewModel.loadUser()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    post = Post.temp(it)
+                    setupViews()
+                }, { error ->
+                    LOG.e(TAG, error)
+                    alert(getString(R.string.error_review_please),
+                            getString(R.string.error_on_create_post_load), init = {
+                        okButton {
+                            close()
+                        }
                     })
-        }
+                })
     }
 
     private fun setupViews() {

@@ -194,7 +194,6 @@ class MainActivity : AppCompatActivity(), LifecycleRegistryOwner {
         userViewModel.signUp(nickname())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnSuccess { userViewModel.userData.value = it }
                 .subscribe({
                     showSignInSuccess(it)
                 }, { error ->
@@ -238,7 +237,7 @@ class MainActivity : AppCompatActivity(), LifecycleRegistryOwner {
 
         val startTime = System.currentTimeMillis()
 
-        InitialData.from(userViewModel.loadAccount(), postViewModel.hasPosts())
+        InitialData.from(userViewModel.loadUser(), postViewModel.hasPosts())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({

@@ -10,15 +10,18 @@ import io.reactivex.Single
 class UserViewModel(private val userRemoteRepository: UserRemoteRepository,
                     private val userLocalRepository: UserLocalRepository) : ViewModel() {
 
-    val userData = MutableLiveData<User>()
+    private val userData = MutableLiveData<User>()
 
     fun signUp(nickname: String): Single<User> {
         return userRemoteRepository.save(nickname)
                 .flatMap { userLocalRepository.saveAndGet(it) }
+                .doOnSuccess { userData.value = it }
     }
 
-    fun loadAccount(): Single<User> {
-        return userLocalRepository.findOne()
+    fun loadUser(): Single<User> {
+        return userData.value?.let { Single.just(it) } ?:
+                userLocalRepository.findOne()
+                        .doOnSuccess { userData.value = it }
     }
 
 }
