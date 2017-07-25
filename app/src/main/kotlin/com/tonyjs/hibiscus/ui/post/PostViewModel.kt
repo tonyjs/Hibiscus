@@ -1,5 +1,6 @@
 package com.tonyjs.hibiscus.ui.post
 
+import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import com.tonyjs.hibiscus.data.model.Post
@@ -13,7 +14,8 @@ import io.reactivex.Single
 class PostViewModel(private val postLocalRepository: PostLocalRepository,
                     private val postRemoteRepository: PostRemoteRepository) : ViewModel() {
 
-    val createEvent = MutableLiveData<Post>()
+    val createSuccessEvent = MutableLiveData<Post>()
+    val deleteCommand: LiveData<Post> = MutableLiveData<Post>()
 
     fun createAndGet(post: Post): Single<Post> {
         return postLocalRepository.saveAndGet(post)
@@ -36,5 +38,11 @@ class PostViewModel(private val postLocalRepository: PostLocalRepository,
     fun removeAllPosts(): Completable {
         return postLocalRepository.removeAll()
     }
+
+    fun callDeleteCommand(post: Post) {
+        (deleteCommand as MutableLiveData).value = post
+    }
+
+    fun delete(post: Post): Completable = postLocalRepository.delete(post)
 
 }

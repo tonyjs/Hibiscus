@@ -155,7 +155,7 @@ class CreatePostFragment : BaseFragment() {
         postViewModel.createAndGet(post)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnSuccess { postViewModel.createEvent.value = it }
+                .doOnSuccess { postViewModel.createSuccessEvent.value = it }
                 .subscribe({
                     close()
                     navigationViewModel.moveTo(NavigationTo.POST_LIST)

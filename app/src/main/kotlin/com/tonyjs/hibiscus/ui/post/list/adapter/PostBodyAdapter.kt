@@ -23,7 +23,7 @@ open class PostBodyAdapter(val post: Post) : MultiViewTypeAdapter() {
     }
 
     init {
-        addItem(Pair(post.title, post.createdTime), VIEW_TYPE_TITLE)
+        addItem(post, VIEW_TYPE_TITLE)
         addBodyRows()
     }
 

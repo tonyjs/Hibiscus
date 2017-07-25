@@ -20,8 +20,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_post_list.*
 import kotlinx.android.synthetic.main.fragment_post_list.view.*
-import org.jetbrains.anko.childrenSequence
-import org.jetbrains.anko.okButton
+import org.jetbrains.anko.*
 import org.jetbrains.anko.support.v4.alert
 
 class PostListFragment : BaseFragment() {
@@ -78,10 +77,31 @@ class PostListFragment : BaseFragment() {
     private fun setupPostViewModel() {
         postViewModel = ViewModelProviders.of(activity, ViewModelFactory.from(activity.application))
                 .get(PostViewModel::class.java)
-        postViewModel.createEvent.observe(this, Observer {
+        postViewModel.createSuccessEvent.observe(this, Observer {
             if (lifecycle.currentState.isAtLeast(Lifecycle.State.RESUMED)) {
                 it?.let { post -> addPost(post) }
             }
+        })
+
+        postViewModel.deleteCommand.observe(this, Observer { post ->
+            if (post == null) {
+                return@Observer
+            }
+
+            alert(getString(R.string.question_want_to_delete_post)) {
+                noButton { }
+                yesButton {
+                    postViewModel.delete(post)
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe({
+                                deletePost(post)
+                            }, { error ->
+                                LOG.e(TAG, error)
+                                // TODO
+                            })
+                }
+            }.show()
         })
     }
 
@@ -120,6 +140,14 @@ class PostListFragment : BaseFragment() {
             view?.list?.run {
                 smoothScrollToPosition(itemCount - 1)
             }
+        }
+    }
+
+    private fun deletePost(post: Post) {
+        adapter?.run {
+            val index = posts.indexOf(post)
+            posts.removeAt(index)
+            notifyItemRemoved(index)
         }
     }
 
