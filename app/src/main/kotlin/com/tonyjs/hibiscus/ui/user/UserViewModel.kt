@@ -15,13 +15,13 @@ class UserViewModel(private val userRemoteRepository: UserRemoteRepository,
     fun signUp(nickname: String): Single<User> {
         return userRemoteRepository.save(nickname)
                 .flatMap { userLocalRepository.saveAndGet(it) }
-                .doOnSuccess { userData.value = it }
+                .doOnSuccess { userData.postValue(it) }
     }
 
     fun loadUser(): Single<User> {
         return userData.value?.let { Single.just(it) } ?:
                 userLocalRepository.findOne()
-                        .doOnSuccess { userData.value = it }
+                        .doOnSuccess { userData.postValue(it) }
     }
 
 }

@@ -7,6 +7,8 @@
     <string name="welcome_user">%s님 반가워요!</string>
     <string name="click_create_post">글쓰기 버튼을 눌러보세요!</string>
     <string name="create_post">글쓰기</string>
+    <string name="delete_post">삭제</string>
+    <string name="question_want_to_delete_post">삭제 하시겠습니까?</string>
     <string name="done">완료</string>
     <string name="photo">사진</string>
     <string name="input_title">제목</string>

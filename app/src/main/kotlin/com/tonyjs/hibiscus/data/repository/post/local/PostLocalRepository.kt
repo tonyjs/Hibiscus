@@ -107,6 +107,15 @@ class PostFromDatabaseRepository(private val db: KotlinEntityDataStore<Persistab
         }
     }
 
+    override fun delete(post: Post): Completable {
+        return Completable.fromCallable {
+            db.delete(PostEntity::class)
+                    .where(PostEntity.ID.eq(post.id))
+                    .get()
+                    .value()
+        }
+    }
+
 }
 
 interface PostLocalRepository {
@@ -122,5 +131,7 @@ interface PostLocalRepository {
     fun findAllLowerThan(offset: Long = Long.MAX_VALUE, limit: Int): Single<List<Post>>
 
     fun removeAll(): Completable
+
+    fun delete(post: Post): Completable
 
 }
