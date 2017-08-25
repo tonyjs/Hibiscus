@@ -2,6 +2,7 @@ package com.tonyjs.hibiscus.ui
 
 import android.arch.lifecycle.*
 import android.os.Bundle
+import android.os.Looper
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.AppCompatActivity
@@ -30,6 +31,7 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.okButton
+import java.lang.UnsupportedOperationException
 
 class MainActivity : AppCompatActivity(), LifecycleRegistryOwner {
 
@@ -54,24 +56,23 @@ class MainActivity : AppCompatActivity(), LifecycleRegistryOwner {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         savedInstanceState?.run {
-            //FIXME anything?
-        } ?: run {
-            setupMessageAdapter()
-
-            setupMessageViewModel()
-
-            setupNavigationViewModel()
-
-            setupAccountViewModel()
-
-            setupPostViewModel()
-
-            setupUserActionListeners()
-
-            start()
+            removeAllFragments()
         }
+
+        setupMessageAdapter()
+
+        setupMessageViewModel()
+
+        setupNavigationViewModel()
+
+        setupUserViewModel()
+
+        setupPostViewModel()
+
+        setupUserActionListeners()
+
+        start()
     }
 
     private fun setupMessageAdapter() {
@@ -116,35 +117,25 @@ class MainActivity : AppCompatActivity(), LifecycleRegistryOwner {
         navigationViewModel = ViewModelProviders.of(this, ViewModelFactory.from(application))
                 .get(NavigationViewModel::class.java)
         navigationViewModel.navigationEvent
-                .observe(this, Observer {
-                    when (it) {
-                        NavigationTo.READY ->
-                            showReady(it)
-                        NavigationTo.SIGN_IN -> {
-                            showSignIn()
-                        }
-                        NavigationTo.GUIDE_TO_CREATE_POST -> {
-                            showCreatePost()
-                        }
-                        NavigationTo.CREATE_POST -> {
-                            moveToCreatePost()
-                        }
-                        NavigationTo.POST_LIST -> {
-                            moveToPostList()
-                        }
+                .observe(this, Observer { navigationTo ->
+                    when (navigationTo) {
+                        NavigationTo.READY -> showReady(navigationTo)
+                        NavigationTo.SIGN_IN -> showSignIn()
+                        NavigationTo.GUIDE_TO_CREATE_POST -> showCreatePost()
+                        NavigationTo.CREATE_POST -> moveToCreatePost()
+                        NavigationTo.POST_LIST -> moveToPostList()
+                        else -> throw UnsupportedOperationException()
                     }
                 })
     }
 
     private fun moveToPostList() {
-        for (i in 0..supportFragmentManager.backStackEntryCount) {
-            supportFragmentManager.popBackStack()
-        }
+        removeAllFragments()
 
         addFragment(PostListFragment(), PostListFragment.TAG, false)
     }
 
-    private fun setupAccountViewModel() {
+    private fun setupUserViewModel() {
         userViewModel = ViewModelProviders.of(this, ViewModelFactory.from(application))
                 .get(UserViewModel::class.java)
     }
@@ -299,6 +290,14 @@ class MainActivity : AppCompatActivity(), LifecycleRegistryOwner {
                 ft.commitNowAllowingStateLoss()
             }
         }
+    }
+
+    private fun removeAllFragments() {
+        postToMainThread(runCondition = { isAlive(lifecycle) }, job = {
+            for (i in 0..supportFragmentManager.backStackEntryCount) {
+                supportFragmentManager.popBackStack()
+            }
+        })
     }
 
     private fun addDisposable(disposable: Disposable) {

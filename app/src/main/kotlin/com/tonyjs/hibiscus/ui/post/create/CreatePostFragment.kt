@@ -2,6 +2,7 @@ package com.tonyjs.hibiscus.ui.post.create
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.pm.PackageManager
@@ -95,13 +96,16 @@ class CreatePostFragment : BaseFragment() {
     }
 
     private fun setupViews() {
-        setupNavigationViewModel()
-        setupPostViewModel()
-        setupPhotoViewModel()
+        LOG.e("life", lifecycle.currentState.name)
+        if (isAlive(lifecycle)) {
+            setupNavigationViewModel()
+            setupPostViewModel()
+            setupPhotoViewModel()
 
-        setupTitleEditor()
-        setupTextEditor()
-        setupUserActionListeners()
+            setupTitleEditor()
+            setupTextEditor()
+            setupUserActionListeners()
+        }
     }
 
     private fun setupPostViewModel() {
@@ -225,7 +229,7 @@ class CreatePostFragment : BaseFragment() {
     override fun onDestroyView() {
         hideSoftInput(frame.findFocus() ?: run {
             val lastChild = frame.getChildAt(frame.childCount - 1)
-            lastChild.requestFocus()
+            lastChild?.requestFocus()
             lastChild
         })
         super.onDestroyView()
